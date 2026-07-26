@@ -23,7 +23,7 @@ musicControls.style.display = "none";
 
 // Volumen inicial
 bgMusic.volume = 0;
-volumeSlider.value = 10;
+volumeSlider.value = 3;
 
 let index = 0;
 
@@ -73,7 +73,7 @@ enterButton.addEventListener("click", async () => {
 
     // Reiniciar volumen
     bgMusic.volume = 0;
-    volumeSlider.value = 20;
+    volumeSlider.value = 30;
 
     try{
 
@@ -85,26 +85,27 @@ enterButton.addEventListener("click", async () => {
 
     }
 
-    // Fade In
-    let volumen = 0;
+// Fade In suave hasta 5%
 
-    const fade = setInterval(() => {
+let volumen = 0;
 
-        volumen += 0.01;
+const volumenFinal = 0.05;
 
-        if(volumen >= 0.10){
+const fade = setInterval(() => {
 
-            volumen = 0.10;
+    volumen += 0.0015;
 
-            clearInterval(fade);
+    if (volumen >= volumenFinal){
 
-        }
+        volumen = volumenFinal;
 
-        bgMusic.volume = volumen;
+        clearInterval(fade);
 
-        volumeSlider.value = volumen * 100;
+    }
 
-    },100);
+    bgMusic.volume = volumen;
+
+},120);
 
     enterButton.classList.add("button-hide");
 
