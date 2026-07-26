@@ -8,6 +8,10 @@ const responseScreen = document.querySelector(".response-screen");
 const letter = document.querySelector(".letter");
 const letterText = document.getElementById("letterText");
 
+// Música
+const bgMusic = document.getElementById("bgMusic");
+bgMusic.volume = 0.35;
+
 let index = 0;
 
 let autoScroll = true;
@@ -50,6 +54,9 @@ window.addEventListener("touchmove", () => {
 // ==========================
 
 enterButton.addEventListener("click", () => {
+
+    // Reproducir música
+    bgMusic.play().catch(() => {});
 
     enterButton.classList.add("button-hide");
 
@@ -98,27 +105,26 @@ function typeWriter(){
             text +
             '<span class="cursor"></span>';
 
-  setTimeout(() => {
+        setTimeout(() => {
 
-    finishButton.classList.remove("hidden");
+            finishButton.classList.remove("hidden");
 
-    finishButton.classList.add("fade-in");
+            finishButton.classList.add("fade-in");
 
-    finishButton.style.pointerEvents = "all";
+            finishButton.style.pointerEvents = "all";
 
-    // Espera un instante para que el botón exista visualmente
-    setTimeout(() => {
+            setTimeout(() => {
 
-        finishButton.scrollIntoView({
+                finishButton.scrollIntoView({
 
-            behavior: "smooth",
-            block: "center"
+                    behavior: "smooth",
+                    block: "center"
 
-        });
+                });
 
-    }, 300);
+            }, 300);
 
-}, 2000);
+        }, 2000);
 
         return;
 
