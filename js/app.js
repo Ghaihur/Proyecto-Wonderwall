@@ -18,6 +18,10 @@ const musicControls = document.getElementById("musicControls");
 const playPauseButton = document.getElementById("playPauseButton");
 const volumeSlider = document.getElementById("volumeSlider");
 
+// Ocultar controles al iniciar
+musicControls.style.display = "none";
+
+// Volumen inicial
 bgMusic.volume = 0;
 volumeSlider.value = 20;
 
@@ -62,29 +66,45 @@ window.addEventListener("touchmove", () => {
 // Botón Entrar
 // ==========================
 
-enterButton.addEventListener("click", () => {
+enterButton.addEventListener("click", async () => {
 
-    musicControls.classList.remove("hidden");
+    // Mostrar controles
+    musicControls.style.display = "flex";
 
-    bgMusic.play().catch(() => {});
+    // Reiniciar volumen
+    bgMusic.volume = 0;
+    volumeSlider.value = 20;
 
-    let volumenObjetivo = 0.20;
+    try{
+
+        await bgMusic.play();
+
+    }catch(error){
+
+        console.log(error);
+
+    }
+
+    // Fade In
+    let volumen = 0;
 
     const fade = setInterval(() => {
 
-        if (bgMusic.volume >= volumenObjetivo) {
+        volumen += 0.01;
 
-            bgMusic.volume = volumenObjetivo;
+        if(volumen >= 0.20){
+
+            volumen = 0.20;
 
             clearInterval(fade);
 
-        } else {
-
-            bgMusic.volume += 0.01;
-
         }
 
-    }, 120);
+        bgMusic.volume = volumen;
+
+        volumeSlider.value = volumen * 100;
+
+    },100);
 
     enterButton.classList.add("button-hide");
 
@@ -145,8 +165,9 @@ function typeWriter(){
 
                 finishButton.scrollIntoView({
 
-                    behavior: "smooth",
-                    block: "center"
+                    behavior:"smooth",
+
+                    block:"center"
 
                 });
 
@@ -276,7 +297,7 @@ hereButton.addEventListener("click", () => {
 // Controles de música
 // ==========================
 
-// Barra de volumen
+// Cambiar volumen
 
 volumeSlider.addEventListener("input", () => {
 
@@ -284,15 +305,23 @@ volumeSlider.addEventListener("input", () => {
 
 });
 
-// Pausa / Reanudar
+// Pausar / Reanudar
 
-playPauseButton.addEventListener("click", () => {
+playPauseButton.addEventListener("click", async () => {
 
     if(bgMusic.paused){
 
-        bgMusic.play();
+        try{
 
-        playPauseButton.textContent = "⏸️";
+            await bgMusic.play();
+
+            playPauseButton.textContent = "⏸️";
+
+        }catch(error){
+
+            console.log(error);
+
+        }
 
     }else{
 
@@ -301,5 +330,19 @@ playPauseButton.addEventListener("click", () => {
         playPauseButton.textContent = "▶️";
 
     }
+
+});
+
+// Mantener el icono sincronizado
+
+bgMusic.addEventListener("play", () => {
+
+    playPauseButton.textContent = "⏸️";
+
+});
+
+bgMusic.addEventListener("pause", () => {
+
+    playPauseButton.textContent = "▶️";
 
 });
