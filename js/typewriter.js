@@ -1,44 +1,96 @@
-function typeWriter() {
+function typeWriter(){
 
-    if (index >= text.length) {
+    if(index >= text.length){
 
         letterText.innerHTML =
             text +
             '<span class="cursor"></span>';
 
+        setTimeout(() => {
+
+            finishButton.classList.remove("hidden");
+
+            finishButton.classList.add("fade-in");
+
+            finishButton.style.pointerEvents = "all";
+
+            setTimeout(() => {
+
+                finishButton.scrollIntoView({
+
+                    behavior:"smooth",
+
+                    block:"center"
+
+                });
+
+            },300);
+
+        },2000);
+
         return;
+
     }
 
-    const current = text.substring(0, index + 1);
+    const current =
+        text.substring(0,index+1);
 
     letterText.innerHTML =
         current +
         '<span class="cursor"></span>';
 
-    let delay = 180 + Math.random() * 90;
+    if(autoScroll){
 
-    const char = text[index];
+        const cursor =
+            document.querySelector(".cursor");
 
-    if (char === "." || char === "!" || char === "?") {
+        if(cursor){
 
-        delay = 900;
+            const rect =
+                cursor.getBoundingClientRect();
+
+            if(rect.bottom > window.innerHeight * 0.80){
+
+                window.scrollBy({
+
+                    top:100,
+
+                    behavior:"smooth"
+
+                });
+
+            }
+
+        }
 
     }
 
-    else if (char === ",") {
+    let delay =
+        55 + Math.random() * 25;
 
-        delay = 500;
+    const char =
+        text[index];
+
+    if(char==="." || char==="!" || char==="?"){
+
+        delay = 450;
 
     }
 
-    else if (char === "\n") {
+    else if(char === ","){
 
-        delay = 1100;
+        delay = 220;
+
+    }
+
+    else if(char === "\n"){
+
+        delay = 600;
 
     }
 
     index++;
 
-    setTimeout(typeWriter, delay);
+    setTimeout(typeWriter,delay);
 
 }
