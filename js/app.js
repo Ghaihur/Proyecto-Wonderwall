@@ -225,34 +225,3 @@ hereButton.addEventListener("click", () => {
     );
 
 });
-
-skipButton.addEventListener("click", () => {
-
-    // Oculta la pantalla inicial
-    welcomeScreen.classList.add("hidden");
-
-    // Muestra la pantalla de la carta
-    letterScreen.classList.remove("hidden");
-
-    // Quita cualquier animación
-    letter.classList.remove("paper-rise");
-    letter.classList.remove("letter-hide");
-
-    // Muestra la carta directamente
-    letter.style.opacity = "1";
-    letter.style.transform = "translateY(0)";
-
-    // Escribe toda la carta de una
-    letterText.innerHTML =
-        text +
-        '<span class="cursor"></span>';
-
-    // Hace visible el botón
-    finishButton.classList.remove("hidden");
-    finishButton.classList.add("fade-in");
-    finishButton.style.pointerEvents = "all";
-
-    // Lleva al inicio
-    window.scrollTo(0,0);
-
-});
