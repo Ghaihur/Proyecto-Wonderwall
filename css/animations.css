@@ -1,0 +1,141 @@
+/* ===========================================
+   BOTÓN
+=========================================== */
+
+@keyframes breathe{
+
+    0%{
+
+        transform:translateY(0);
+
+        box-shadow:0 12px 30px rgba(245,168,197,.30);
+
+    }
+
+    50%{
+
+        transform:translateY(-4px);
+
+        box-shadow:0 22px 45px rgba(245,168,197,.45);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+        box-shadow:0 12px 30px rgba(245,168,197,.30);
+
+    }
+
+}
+
+/* ===========================================
+   DESAPARECER BOTÓN
+=========================================== */
+
+.button-hide{
+
+    animation:buttonHide .45s forwards;
+
+}
+
+@keyframes buttonHide{
+
+    from{
+
+        opacity:1;
+        transform:scale(1);
+
+    }
+
+    to{
+
+        opacity:0;
+        transform:scale(.8);
+
+    }
+
+}
+
+/* ===========================================
+   SUBIDA DE LA HOJA
+=========================================== */
+
+/* ===========================================
+   SUBIDA DE LA HOJA
+=========================================== */
+
+.paper-rise{
+
+    animation:paperRise 2.8s cubic-bezier(.12,.82,.18,1) forwards;
+
+}
+
+@keyframes paperRise{
+
+    0%{
+
+        opacity:1;
+
+        transform:
+            translateY(130vh)
+            scale(.96);
+
+    }
+
+    55%{
+
+        transform:
+            translateY(18vh)
+            scale(.985);
+
+    }
+
+    82%{
+
+        transform:
+            translateY(-8px)
+            scale(1.003);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+/* ===========================================
+   CURSOR
+=========================================== */
+
+.cursor{
+
+    display:inline-block;
+
+    width:2px;
+
+    background:#5A3650;
+
+    margin-left:2px;
+
+    animation:blink .8s infinite;
+
+}
+
+@keyframes blink{
+
+    50%{
+
+        opacity:0;
+
+    }
+
+}

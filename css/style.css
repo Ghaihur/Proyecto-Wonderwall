@@ -1,0 +1,234 @@
+/* ===========================================
+   VARIABLES
+=========================================== */
+
+:root{
+
+    --background:#FFF8FB;
+
+    --primary:#F5A8C5;
+    --primary-hover:#EC8FB6;
+
+    --paper:#F5A8C5;
+
+    --text:#5A3650;
+
+}
+
+/* ===========================================
+   RESET
+=========================================== */
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+html,
+body{
+
+    width:100%;
+    height:100%;
+
+}
+
+/* ===========================================
+   BODY
+=========================================== */
+
+body{
+
+    font-family:"Poppins",sans-serif;
+
+    background:
+    radial-gradient(
+        circle at top,
+        #fffdfd 0%,
+        #fff7fb 45%,
+        #fff3f8 100%
+    );
+
+    overflow:hidden;
+
+}
+
+/* ===========================================
+   APP
+=========================================== */
+
+.app{
+
+    position:relative;
+
+    width:100vw;
+    height:100vh;
+
+}
+
+/* ===========================================
+   PANTALLAS
+=========================================== */
+
+.welcome-screen,
+.letter-screen,
+.response-screen{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+}
+
+/* ===========================================
+   BOTÓN
+=========================================== */
+
+#enterButton{
+
+    width:220px;
+    height:66px;
+
+    border:none;
+
+    border-radius:22px;
+
+    background:var(--primary);
+
+    color:white;
+
+    font-size:18px;
+    font-weight:600;
+
+    font-family:"Poppins",sans-serif;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 15px 35px rgba(245,168,197,.35);
+
+    animation:breathe 1.25s infinite;
+
+    transition:.25s;
+
+}
+
+#enterButton:hover{
+
+    background:var(--primary-hover);
+
+}
+
+#enterButton:active{
+
+    transform:scale(.96);
+
+}
+
+/* ===========================================
+   HOJA
+=========================================== */
+
+.letter{
+
+    width:min(88%,760px);
+
+    height:min(82vh,760px);
+
+    background:#E895B8;
+
+    border-radius:30px;
+
+    box-shadow:
+        0 35px 80px rgba(245,168,197,.35);
+
+    padding:55px;
+
+    overflow:hidden;
+
+    opacity:0;
+
+    transform:translateY(100vh);
+
+}
+
+/* ===========================================
+   CONTENIDO
+=========================================== */
+
+#letterText{
+
+    color:#5A3650;
+
+    font-family:"Playfair Display",serif;
+
+    font-size:1.35rem;
+
+    line-height:1.9;
+
+    white-space:pre-wrap;
+
+}
+
+.cursor{
+
+    display:inline-block;
+
+    width:2px;
+
+    height:1.45rem;
+
+    background:#5A3650;
+
+    margin-left:2px;
+
+    vertical-align:middle;
+
+    animation:blink .9s infinite;
+
+}
+
+@keyframes blink{
+
+    0%{
+
+        opacity:1;
+
+    }
+
+    49%{
+
+        opacity:1;
+
+    }
+
+    50%{
+
+        opacity:0;
+
+    }
+
+    100%{
+
+        opacity:0;
+
+    }
+
+}
+
+/* ===========================================
+   UTIL
+=========================================== */
+
+.hidden{
+
+    display:none;
+
+}
