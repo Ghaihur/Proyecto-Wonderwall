@@ -23,7 +23,7 @@ musicControls.style.display = "none";
 
 // Volumen inicial
 bgMusic.volume = 0;
-volumeSlider.value = 20;
+volumeSlider.value = 10;
 
 let index = 0;
 
@@ -92,9 +92,9 @@ enterButton.addEventListener("click", async () => {
 
         volumen += 0.01;
 
-        if(volumen >= 0.20){
+        if(volumen >= 0.10){
 
-            volumen = 0.20;
+            volumen = 0.10;
 
             clearInterval(fade);
 
@@ -301,7 +301,23 @@ hereButton.addEventListener("click", () => {
 
 volumeSlider.addEventListener("input", () => {
 
-    bgMusic.volume = volumeSlider.value / 100;
+    const volume = Number(volumeSlider.value) / 100;
+
+    bgMusic.volume = volume;
+
+    if(volume === 0){
+
+        playPauseButton.textContent = "🔇";
+
+    }else if(bgMusic.paused){
+
+        playPauseButton.textContent = "▶️";
+
+    }else{
+
+        playPauseButton.textContent = "⏸️";
+
+    }
 
 });
 
