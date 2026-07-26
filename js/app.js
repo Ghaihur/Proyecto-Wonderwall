@@ -8,9 +8,18 @@ const responseScreen = document.querySelector(".response-screen");
 const letter = document.querySelector(".letter");
 const letterText = document.getElementById("letterText");
 
+// ==========================
 // Música
+// ==========================
+
 const bgMusic = document.getElementById("bgMusic");
-bgMusic.volume = 0.35;
+
+const musicControls = document.getElementById("musicControls");
+const playPauseButton = document.getElementById("playPauseButton");
+const volumeSlider = document.getElementById("volumeSlider");
+
+bgMusic.volume = 0;
+volumeSlider.value = 20;
 
 let index = 0;
 
@@ -55,8 +64,27 @@ window.addEventListener("touchmove", () => {
 
 enterButton.addEventListener("click", () => {
 
-    // Reproducir música
+    musicControls.classList.remove("hidden");
+
     bgMusic.play().catch(() => {});
+
+    let volumenObjetivo = 0.20;
+
+    const fade = setInterval(() => {
+
+        if (bgMusic.volume >= volumenObjetivo) {
+
+            bgMusic.volume = volumenObjetivo;
+
+            clearInterval(fade);
+
+        } else {
+
+            bgMusic.volume += 0.01;
+
+        }
+
+    }, 120);
 
     enterButton.classList.add("button-hide");
 
@@ -122,9 +150,9 @@ function typeWriter(){
 
                 });
 
-            }, 300);
+            },300);
 
-        }, 2000);
+        },2000);
 
         return;
 
@@ -241,5 +269,37 @@ hereButton.addEventListener("click", () => {
         `https://wa.me/${phone}?text=${message}`,
         "_blank"
     );
+
+});
+
+// ==========================
+// Controles de música
+// ==========================
+
+// Barra de volumen
+
+volumeSlider.addEventListener("input", () => {
+
+    bgMusic.volume = volumeSlider.value / 100;
+
+});
+
+// Pausa / Reanudar
+
+playPauseButton.addEventListener("click", () => {
+
+    if(bgMusic.paused){
+
+        bgMusic.play();
+
+        playPauseButton.textContent = "⏸️";
+
+    }else{
+
+        bgMusic.pause();
+
+        playPauseButton.textContent = "▶️";
+
+    }
 
 });

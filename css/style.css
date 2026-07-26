@@ -1,347 +1,204 @@
 /* ===========================================
-   VARIABLES
+   CONTROLES DE MÚSICA
 =========================================== */
 
-:root{
-
-    --background:#FFF8FB;
-
-    --primary:#F5A8C5;
-    --primary-hover:#EC8FB6;
-
-    --paper:#E895B8;
-
-    --text:#5A3650;
-
-}
-
-/* ===========================================
-   RESET
-=========================================== */
-
-*{
-
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-
-}
-
-html,
-body{
-
-    width:100%;
-    min-height:100%;
-
-}
-
-/* ===========================================
-   BODY
-=========================================== */
-
-body{
-
-    font-family:"Poppins",sans-serif;
-
-    background:
-    radial-gradient(
-        circle at top,
-        #fffdfd 0%,
-        #fff7fb 45%,
-        #fff3f8 100%
-    );
-
-    overflow-x:hidden;
-    overflow-y:auto;
-
-    scroll-behavior:smooth;
-
-}
-
-/* ===========================================
-   APP
-=========================================== */
-
-.app{
-
-    width:100%;
-
-    min-height:100vh;
-
-}
-
-/* ===========================================
-   PANTALLAS
-=========================================== */
-
-.welcome-screen{
+#musicControls{
 
     position:fixed;
 
-    inset:0;
+    right:22px;
 
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-}
-
-.letter-screen{
-
-    width:100%;
+    bottom:22px;
 
     display:flex;
 
     flex-direction:column;
 
-    justify-content:flex-start;
-
     align-items:center;
-
-    padding:80px 0;
-
-}
-
-.response-screen{
-
-    width:100%;
-
-    min-height:100vh;
-
-    display:flex;
-
-    flex-direction:column;
 
     justify-content:center;
 
-    align-items:center;
+    gap:20px;
 
-    gap:30px;
+    padding:18px 16px;
 
-    padding:40px;
+    background:rgba(232,149,184,.88);
 
-}
+    backdrop-filter:blur(16px);
 
-/* ===========================================
-   BOTONES
-=========================================== */
+    -webkit-backdrop-filter:blur(16px);
 
-#enterButton,
-#finishButton{
-
-    width:230px;
-
-    height:66px;
-
-    border:none;
-
-    border-radius:22px;
-
-    background:var(--primary);
-
-    color:white;
-
-    font-size:18px;
-
-    font-weight:600;
-
-    font-family:"Poppins",sans-serif;
-
-    cursor:pointer;
+    border-radius:28px;
 
     box-shadow:
-    0 15px 35px rgba(245,168,197,.35);
+        0 20px 45px rgba(90,54,80,.18);
 
-    transition:.25s;
+    z-index:99999;
 
-}
-
-#enterButton{
-
-    animation:breathe 1.25s infinite;
+    transition:.35s;
 
 }
 
-#enterButton:hover,
-#finishButton:hover{
+/* Oculto al iniciar */
 
-    background:var(--primary-hover);
-
-}
-
-#finishButton{
-
-    margin-top:40px;
-
-    opacity:0;
-
-    pointer-events:none;
-
-}
-
-/* ===========================================
-   BOTÓN FINAL
-=========================================== */
-
-#hereButton{
-
-    width:180px;
-
-    height:58px;
-
-    border:none;
-
-    border-radius:999px;
-
-    background:#DB77A4;
-
-    color:white;
-
-    font-size:18px;
-
-    font-weight:600;
-
-    font-family:"Poppins",sans-serif;
-
-    cursor:pointer;
-
-    box-shadow:
-    0 18px 40px rgba(219,119,164,.35);
-
-    transition:.25s;
-
-}
-
-#hereButton:hover{
-
-    transform:translateY(-2px);
-
-    background:#CF6595;
-
-}
-
-/* ===========================================
-   CARTA
-=========================================== */
-
-.letter{
-
-    width:min(90vw,900px);
-
-    min-height:85vh;
-
-    background:#E895B8;
-
-    border-radius:24px;
-
-    box-shadow:
-    0 25px 70px rgba(245,168,197,.35);
-
-    padding:55px;
-
-    margin-bottom:20px;
-
-    opacity:0;
-
-    transform:translateY(100vh);
-
-}
-
-/* ===========================================
-   TARJETA FINAL
-=========================================== */
-
-.final-card{
-
-    width:min(90vw,650px);
-
-    background:#F5A8C5;
-
-    color:white;
-
-    padding:30px;
-
-    border-radius:24px;
-
-    text-align:center;
-
-    font-size:1.25rem;
-
-    font-weight:500;
-
-    box-shadow:
-    0 20px 45px rgba(245,168,197,.35);
-
-}
-
-/* ===========================================
-   TEXTO
-=========================================== */
-
-#letterText{
-
-    color:#5A3650;
-
-    font-family:"Playfair Display",serif;
-
-    font-size:1.35rem;
-
-    line-height:1.9;
-
-    white-space:pre-wrap;
-
-}
-
-/* ===========================================
-   CURSOR
-=========================================== */
-
-.cursor{
-
-    display:inline-block;
-
-    width:2px;
-
-    height:1.45rem;
-
-    background:#5A3650;
-
-    margin-left:3px;
-
-    vertical-align:middle;
-
-    animation:blink 1.4s infinite;
-
-}
-
-@keyframes blink{
-
-    0%,45%{
-
-        opacity:1;
-
-    }
-
-    46%,100%{
-
-        opacity:0;
-
-    }
-
-}
-
-/* ===========================================
-   UTIL
-=========================================== */
-
-.hidden{
+#musicControls.hidden{
 
     display:none;
 
 }
 
-/* ===========================================
-   BOTÓN SALTAR (SOLO TEST)
-=========================================== */
+/* ==========================
+   Botón pausa
+========================== */
 
+#playPauseButton{
+
+    width:58px;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#FFF8FB;
+
+    color:#5A3650;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:
+        0 10px 25px rgba(90,54,80,.15);
+
+}
+
+#playPauseButton:hover{
+
+    transform:scale(1.05);
+
+}
+
+#playPauseButton:active{
+
+    transform:scale(.94);
+
+}
+
+/* ==========================
+   Slider
+========================== */
+
+#volumeSlider{
+
+    -webkit-appearance:none;
+
+    appearance:none;
+
+    width:150px;
+
+    height:8px;
+
+    transform:rotate(-90deg);
+
+    background:transparent;
+
+    cursor:pointer;
+
+}
+
+#volumeSlider::-webkit-slider-runnable-track{
+
+    height:8px;
+
+    background:#F8D6E3;
+
+    border-radius:999px;
+
+}
+
+#volumeSlider::-webkit-slider-thumb{
+
+    -webkit-appearance:none;
+
+    appearance:none;
+
+    width:22px;
+
+    height:22px;
+
+    margin-top:-7px;
+
+    border-radius:50%;
+
+    background:#5A3650;
+
+    border:3px solid #FFF8FB;
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,.18);
+
+}
+
+#volumeSlider::-moz-range-track{
+
+    height:8px;
+
+    background:#F8D6E3;
+
+    border-radius:999px;
+
+}
+
+#volumeSlider::-moz-range-thumb{
+
+    width:22px;
+
+    height:22px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#5A3650;
+
+}
+
+/* ==========================
+   Tablet / iPad
+========================== */
+
+@media (max-width:900px){
+
+    #musicControls{
+
+        right:16px;
+
+        bottom:16px;
+
+        padding:16px 14px;
+
+        gap:18px;
+
+    }
+
+    #playPauseButton{
+
+        width:62px;
+
+        height:62px;
+
+        font-size:26px;
+
+    }
+
+    #volumeSlider{
+
+        width:170px;
+
+    }
+
+}
