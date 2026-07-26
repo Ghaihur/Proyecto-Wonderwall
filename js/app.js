@@ -98,15 +98,27 @@ function typeWriter(){
             text +
             '<span class="cursor"></span>';
 
-        setTimeout(()=>{
+  setTimeout(() => {
 
-            finishButton.classList.remove("hidden");
+    finishButton.classList.remove("hidden");
 
-            finishButton.classList.add("fade-in");
+    finishButton.classList.add("fade-in");
 
-            finishButton.style.pointerEvents = "all";
+    finishButton.style.pointerEvents = "all";
 
-        },2000);
+    // Espera un instante para que el botón exista visualmente
+    setTimeout(() => {
+
+        finishButton.scrollIntoView({
+
+            behavior: "smooth",
+            block: "center"
+
+        });
+
+    }, 300);
+
+}, 2000);
 
         return;
 
