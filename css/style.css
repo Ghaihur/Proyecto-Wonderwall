@@ -1,4 +1,351 @@
 /* ===========================================
+   VARIABLES
+=========================================== */
+
+:root{
+
+    --background:#FFF8FB;
+
+    --primary:#F5A8C5;
+    --primary-hover:#EC8FB6;
+
+    --paper:#E895B8;
+
+    --text:#5A3650;
+
+}
+
+/* ===========================================
+   RESET
+=========================================== */
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+html,
+body{
+
+    width:100%;
+    min-height:100%;
+
+}
+
+/* ===========================================
+   BODY
+=========================================== */
+
+body{
+
+    font-family:"Poppins",sans-serif;
+
+    background:
+    radial-gradient(
+        circle at top,
+        #fffdfd 0%,
+        #fff7fb 45%,
+        #fff3f8 100%
+    );
+
+    overflow-x:hidden;
+    overflow-y:auto;
+
+    scroll-behavior:smooth;
+
+}
+
+/* ===========================================
+   APP
+=========================================== */
+
+.app{
+
+    width:100%;
+
+    min-height:100vh;
+
+}
+
+/* ===========================================
+   PANTALLAS
+=========================================== */
+
+.welcome-screen{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+}
+
+.letter-screen{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-start;
+
+    align-items:center;
+
+    padding:80px 0;
+
+}
+
+.response-screen{
+
+    width:100%;
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:30px;
+
+    padding:40px;
+
+}
+
+/* ===========================================
+   BOTONES
+=========================================== */
+
+#enterButton,
+#finishButton{
+
+    width:230px;
+
+    height:66px;
+
+    border:none;
+
+    border-radius:22px;
+
+    background:var(--primary);
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    font-family:"Poppins",sans-serif;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 15px 35px rgba(245,168,197,.35);
+
+    transition:.25s;
+
+}
+
+#enterButton{
+
+    animation:breathe 1.25s infinite;
+
+}
+
+#enterButton:hover,
+#finishButton:hover{
+
+    background:var(--primary-hover);
+
+}
+
+#finishButton{
+
+    margin-top:40px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+/* ===========================================
+   BOTÓN FINAL
+=========================================== */
+
+#hereButton{
+
+    width:180px;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:999px;
+
+    background:#DB77A4;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    font-family:"Poppins",sans-serif;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 18px 40px rgba(219,119,164,.35);
+
+    transition:.25s;
+
+}
+
+#hereButton:hover{
+
+    transform:translateY(-2px);
+
+    background:#CF6595;
+
+}
+
+/* ===========================================
+   CARTA
+=========================================== */
+
+.letter{
+
+    width:min(90vw,900px);
+
+    min-height:85vh;
+
+    background:#E895B8;
+
+    border-radius:24px;
+
+    box-shadow:
+    0 25px 70px rgba(245,168,197,.35);
+
+    padding:55px;
+
+    margin-bottom:20px;
+
+    opacity:0;
+
+    transform:translateY(100vh);
+
+}
+
+/* ===========================================
+   TARJETA FINAL
+=========================================== */
+
+.final-card{
+
+    width:min(90vw,650px);
+
+    background:#F5A8C5;
+
+    color:white;
+
+    padding:30px;
+
+    border-radius:24px;
+
+    text-align:center;
+
+    font-size:1.25rem;
+
+    font-weight:500;
+
+    box-shadow:
+    0 20px 45px rgba(245,168,197,.35);
+
+}
+
+/* ===========================================
+   TEXTO
+=========================================== */
+
+#letterText{
+
+    color:#5A3650;
+
+    font-family:"Playfair Display",serif;
+
+    font-size:1.35rem;
+
+    line-height:1.9;
+
+    white-space:pre-wrap;
+
+}
+
+/* ===========================================
+   CURSOR
+=========================================== */
+
+.cursor{
+
+    display:inline-block;
+
+    width:2px;
+
+    height:1.45rem;
+
+    background:#5A3650;
+
+    margin-left:3px;
+
+    vertical-align:middle;
+
+    animation:blink 1.4s infinite;
+
+}
+
+@keyframes blink{
+
+    0%,45%{
+
+        opacity:1;
+
+    }
+
+    46%,100%{
+
+        opacity:0;
+
+    }
+
+}
+
+/* ===========================================
+   UTIL
+=========================================== */
+
+.hidden{
+
+    display:none;
+
+}
+
+/* ===========================================
+   BOTÓN SALTAR (SOLO TEST)
+=========================================== */
+
+/* ===========================================
    CONTROLES DE MÚSICA
 =========================================== */
 
@@ -6,9 +353,9 @@
 
     position:fixed;
 
-    right:22px;
+    right:20px;
 
-    bottom:22px;
+    bottom:20px;
 
     display:flex;
 
@@ -16,30 +363,25 @@
 
     align-items:center;
 
-    justify-content:center;
+    gap:18px;
 
-    gap:20px;
-
-    padding:18px 16px;
+    padding:16px;
 
     background:rgba(232,149,184,.88);
 
-    backdrop-filter:blur(16px);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
 
-    -webkit-backdrop-filter:blur(16px);
-
-    border-radius:28px;
+    border-radius:24px;
 
     box-shadow:
-        0 20px 45px rgba(90,54,80,.18);
+        0 15px 35px rgba(0,0,0,.18);
 
-    z-index:99999;
-
-    transition:.35s;
+    z-index:9999;
 
 }
 
-/* Oculto al iniciar */
+/* oculto al iniciar */
 
 #musicControls.hidden{
 
@@ -48,7 +390,7 @@
 }
 
 /* ==========================
-   Botón pausa
+   BOTÓN PLAY / PAUSA
 ========================== */
 
 #playPauseButton{
@@ -69,10 +411,7 @@
 
     cursor:pointer;
 
-    transition:.25s;
-
-    box-shadow:
-        0 10px 25px rgba(90,54,80,.15);
+    transition:.2s;
 
 }
 
@@ -84,12 +423,12 @@
 
 #playPauseButton:active{
 
-    transform:scale(.94);
+    transform:scale(.95);
 
 }
 
 /* ==========================
-   Slider
+   VOLUMEN
 ========================== */
 
 #volumeSlider{
@@ -110,6 +449,8 @@
 
 }
 
+/* Safari / Chrome */
+
 #volumeSlider::-webkit-slider-runnable-track{
 
     height:8px;
@@ -126,11 +467,11 @@
 
     appearance:none;
 
-    width:22px;
+    width:20px;
 
-    height:22px;
+    height:20px;
 
-    margin-top:-7px;
+    margin-top:-6px;
 
     border-radius:50%;
 
@@ -138,10 +479,11 @@
 
     border:3px solid #FFF8FB;
 
-    box-shadow:
-        0 4px 10px rgba(0,0,0,.18);
+    box-shadow:0 3px 8px rgba(0,0,0,.20);
 
 }
+
+/* Firefox */
 
 #volumeSlider::-moz-range-track{
 
@@ -155,9 +497,9 @@
 
 #volumeSlider::-moz-range-thumb{
 
-    width:22px;
+    width:20px;
 
-    height:22px;
+    height:20px;
 
     border:none;
 
@@ -167,9 +509,7 @@
 
 }
 
-/* ==========================
-   Tablet / iPad
-========================== */
+/* Tablet */
 
 @media (max-width:900px){
 
@@ -179,9 +519,7 @@
 
         bottom:16px;
 
-        padding:16px 14px;
-
-        gap:18px;
+        padding:14px;
 
     }
 
