@@ -1,5 +1,5 @@
 /* ===========================================
-   BOTÓN
+   BOTÓN ENTRAR
 =========================================== */
 
 @keyframes breathe{
@@ -31,7 +31,7 @@
 }
 
 /* ===========================================
-   DESAPARECER BOTÓN
+   BOTÓN DESAPARECE
 =========================================== */
 
 .button-hide{
@@ -59,11 +59,7 @@
 }
 
 /* ===========================================
-   SUBIDA DE LA HOJA
-=========================================== */
-
-/* ===========================================
-   SUBIDA DE LA HOJA
+   CARTA SUBE
 =========================================== */
 
 .paper-rise{
@@ -84,15 +80,15 @@
 
     }
 
-    55%{
+    60%{
 
         transform:
-            translateY(18vh)
+            translateY(12vh)
             scale(.985);
 
     }
 
-    82%{
+    85%{
 
         transform:
             translateY(-8px)
@@ -113,28 +109,60 @@
 }
 
 /* ===========================================
-   CURSOR
+   CARTA BAJA
 =========================================== */
 
-.cursor{
+.letter-hide{
 
-    display:inline-block;
-
-    width:2px;
-
-    background:#5A3650;
-
-    margin-left:2px;
-
-    animation:blink .8s infinite;
+    animation:letterHide 1.8s cubic-bezier(.70,0,.95,.25) forwards;
 
 }
 
-@keyframes blink{
+@keyframes letterHide{
 
-    50%{
+    from{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+    to{
 
         opacity:0;
+
+        transform:translateY(130vh);
+
+    }
+
+}
+
+/* ===========================================
+   APARECER
+=========================================== */
+
+.fade-in{
+
+    animation:fadeIn .8s ease forwards;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
 
     }
 

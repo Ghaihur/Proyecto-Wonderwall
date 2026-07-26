@@ -9,7 +9,7 @@
     --primary:#F5A8C5;
     --primary-hover:#EC8FB6;
 
-    --paper:#F5A8C5;
+    --paper:#E895B8;
 
     --text:#5A3650;
 
@@ -31,7 +31,7 @@ html,
 body{
 
     width:100%;
-    height:100%;
+    min-height:100%;
 
 }
 
@@ -51,7 +51,10 @@ body{
         #fff3f8 100%
     );
 
-    overflow:hidden;
+    overflow-x:hidden;
+    overflow-y:auto;
+
+    scroll-behavior:smooth;
 
 }
 
@@ -61,10 +64,9 @@ body{
 
 .app{
 
-    position:relative;
+    width:100%;
 
-    width:100vw;
-    height:100vh;
+    min-height:100vh;
 
 }
 
@@ -72,11 +74,9 @@ body{
    PANTALLAS
 =========================================== */
 
-.welcome-screen,
-.letter-screen,
-.response-screen{
+.welcome-screen{
 
-    position:absolute;
+    position:fixed;
 
     inset:0;
 
@@ -87,13 +87,51 @@ body{
 
 }
 
+.letter-screen{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-start;
+
+    align-items:center;
+
+    padding:80px 0;
+
+}
+
+.response-screen{
+
+    width:100%;
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:30px;
+
+    padding:40px;
+
+}
+
 /* ===========================================
-   BOTÓN
+   BOTONES
 =========================================== */
 
-#enterButton{
+#enterButton,
+#finishButton{
 
-    width:220px;
+    width:230px;
+
     height:66px;
 
     border:none;
@@ -105,6 +143,7 @@ body{
     color:white;
 
     font-size:18px;
+
     font-weight:600;
 
     font-family:"Poppins",sans-serif;
@@ -112,46 +151,96 @@ body{
     cursor:pointer;
 
     box-shadow:
-        0 15px 35px rgba(245,168,197,.35);
-
-    animation:breathe 1.25s infinite;
+    0 15px 35px rgba(245,168,197,.35);
 
     transition:.25s;
 
 }
 
-#enterButton:hover{
+#enterButton{
+
+    animation:breathe 1.25s infinite;
+
+}
+
+#enterButton:hover,
+#finishButton:hover{
 
     background:var(--primary-hover);
 
 }
 
-#enterButton:active{
+#finishButton{
 
-    transform:scale(.96);
+    margin-top:40px;
+
+    opacity:0;
+
+    pointer-events:none;
 
 }
 
 /* ===========================================
-   HOJA
+   BOTÓN FINAL
+=========================================== */
+
+#hereButton{
+
+    width:180px;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:999px;
+
+    background:#DB77A4;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    font-family:"Poppins",sans-serif;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 18px 40px rgba(219,119,164,.35);
+
+    transition:.25s;
+
+}
+
+#hereButton:hover{
+
+    transform:translateY(-2px);
+
+    background:#CF6595;
+
+}
+
+/* ===========================================
+   CARTA
 =========================================== */
 
 .letter{
 
-    width:min(88%,760px);
+    width:min(90vw,900px);
 
-    height:min(82vh,760px);
+    min-height:85vh;
 
     background:#E895B8;
 
-    border-radius:30px;
+    border-radius:24px;
 
     box-shadow:
-        0 35px 80px rgba(245,168,197,.35);
+    0 25px 70px rgba(245,168,197,.35);
 
     padding:55px;
 
-    overflow:hidden;
+    margin-bottom:20px;
 
     opacity:0;
 
@@ -160,7 +249,34 @@ body{
 }
 
 /* ===========================================
-   CONTENIDO
+   TARJETA FINAL
+=========================================== */
+
+.final-card{
+
+    width:min(90vw,650px);
+
+    background:#F5A8C5;
+
+    color:white;
+
+    padding:30px;
+
+    border-radius:24px;
+
+    text-align:center;
+
+    font-size:1.25rem;
+
+    font-weight:500;
+
+    box-shadow:
+    0 20px 45px rgba(245,168,197,.35);
+
+}
+
+/* ===========================================
+   TEXTO
 =========================================== */
 
 #letterText{
@@ -177,6 +293,10 @@ body{
 
 }
 
+/* ===========================================
+   CURSOR
+=========================================== */
+
 .cursor{
 
     display:inline-block;
@@ -187,35 +307,23 @@ body{
 
     background:#5A3650;
 
-    margin-left:2px;
+    margin-left:3px;
 
     vertical-align:middle;
 
-    animation:blink .9s infinite;
+    animation:blink 1.4s infinite;
 
 }
 
 @keyframes blink{
 
-    0%{
+    0%,45%{
 
         opacity:1;
 
     }
 
-    49%{
-
-        opacity:1;
-
-    }
-
-    50%{
-
-        opacity:0;
-
-    }
-
-    100%{
+    46%,100%{
 
         opacity:0;
 
@@ -230,5 +338,52 @@ body{
 .hidden{
 
     display:none;
+
+}
+
+/* ===========================================
+   BOTÓN SALTAR (SOLO TEST)
+=========================================== */
+
+#skipButton{
+
+    position:fixed;
+
+    top:20px;
+
+    right:20px;
+
+    width:180px;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#5A3650;
+
+    color:white;
+
+    font-family:"Poppins",sans-serif;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    z-index:9999;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.20);
+
+    transition:.2s;
+
+}
+
+#skipButton:hover{
+
+    transform:translateY(-2px);
 
 }

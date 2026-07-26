@@ -1,113 +1,258 @@
 const enterButton = document.getElementById("enterButton");
+const finishButton = document.getElementById("finishButton");
 
 const welcomeScreen = document.querySelector(".welcome-screen");
 const letterScreen = document.querySelector(".letter-screen");
+const responseScreen = document.querySelector(".response-screen");
 
 const letter = document.querySelector(".letter");
 const letterText = document.getElementById("letterText");
 
-const text = `Hola.
-
-Te quería escribir porque no quiero perder esto que tenemos.
-
-Antes que nada, perdón por cómo me comporté anoche.
-
-No fue lo correcto.
-
-La verdad es que sí tenía pensado salir, pero no te lo dije porque pensé que te ibas a molestar o enojar.
-
-Y entendí que haberte ocultado que iba a salir fue peor que simplemente decirte.
-
-Tenía que haberte dicho desde un principio.
-
-Me caíste genial desde que empezamos a hablar y por eso no me gusta que tengas esa imagen de mí.
-
-Desde el primer momento que te vi sentí algo que no había sentido hace muchísimo tiempo, por eso decidí intentar tener algo lindo contigo.
-
-Al pasar las semanas y seguir conociéndote, me di cuenta de que tenemos gustos diferentes, pero así como tenemos diferencias, también tenemos muchas cosas en común, y eso hizo que me guste mucho compartir contigo esas cosas en común.
-
-No quiero que por lo que pasó anoche dejemos esto lindo que estamos construyendo de a poquito.
-
-No espero que esto arregle todo.
-
-Solo quería que sepas que reconozco que fue muy tonto lo que hice y la manera en la que me comporté.
-
-Ojalá me puedas dar la oportunidad de seguir conociéndote.`;
-
 let index = 0;
+
+let autoScroll = true;
+let scrollTimeout;
+
+// ==========================
+// Scroll manual
+// ==========================
+
+window.addEventListener("wheel", () => {
+
+    autoScroll = false;
+
+    clearTimeout(scrollTimeout);
+
+    scrollTimeout = setTimeout(() => {
+
+        autoScroll = true;
+
+    }, 4000);
+
+});
+
+window.addEventListener("touchmove", () => {
+
+    autoScroll = false;
+
+    clearTimeout(scrollTimeout);
+
+    scrollTimeout = setTimeout(() => {
+
+        autoScroll = true;
+
+    }, 4000);
+
+});
+
+// ==========================
+// Botón Entrar
+// ==========================
 
 enterButton.addEventListener("click", () => {
 
-    // Desaparece el botón
     enterButton.classList.add("button-hide");
 
     setTimeout(() => {
 
-        // Oculta la pantalla del botón
         welcomeScreen.classList.add("hidden");
 
-        // Muestra la pantalla de la carta
         letterScreen.classList.remove("hidden");
 
-        // La hoja sube desde abajo
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"instant"
+
+        });
+
         letter.classList.add("paper-rise");
 
-        // Espera a que termine la animación
         setTimeout(() => {
 
-            // Muestra solamente el cursor durante 2 segundos
-            letterText.innerHTML = '<span class="cursor"></span>';
+            letterText.innerHTML =
+                '<span class="cursor"></span>';
 
             setTimeout(() => {
 
                 typeWriter();
 
-            }, 2000);
+            },2000);
 
-        }, 2800);
+        },2800);
 
-    }, 400);
+    },400);
 
 });
 
-function typeWriter() {
+// ==========================
+// Máquina de escribir
+// ==========================
 
-    if (index >= text.length) {
+function typeWriter(){
+
+    if(index >= text.length){
 
         letterText.innerHTML =
             text +
             '<span class="cursor"></span>';
 
+        setTimeout(()=>{
+
+            finishButton.classList.remove("hidden");
+
+            finishButton.classList.add("fade-in");
+
+            finishButton.style.pointerEvents = "all";
+
+        },2000);
+
         return;
 
     }
 
-    const current = text.substring(0, index + 1);
+    const current =
+        text.substring(0,index+1);
 
     letterText.innerHTML =
         current +
         '<span class="cursor"></span>';
 
-    let delay = 230 + Math.random() * 90;
+    if(autoScroll){
 
-    const char = text[index];
+        const cursor =
+            document.querySelector(".cursor");
 
-    if (char === "." || char === "!" || char === "?") {
+        if(cursor){
 
-        delay = 900;
+            const rect =
+                cursor.getBoundingClientRect();
 
-    } else if (char === ",") {
+            if(rect.bottom > window.innerHeight*0.80){
 
-        delay = 500;
+                window.scrollBy({
 
-    } else if (char === "\n") {
+                    top:100,
 
-        delay = 1100;
+                    behavior:"smooth"
+
+                });
+
+            }
+
+        }
+
+    }
+
+    let delay =
+        55 + Math.random()*25;
+
+    const char =
+        text[index];
+
+    if(char==="." || char==="!" || char==="?"){
+
+        delay = 450;
+
+    }
+
+    else if(char === ","){
+
+        delay = 220;
+
+    }
+
+    else if(char === "\n"){
+
+        delay = 600;
 
     }
 
     index++;
 
-    setTimeout(typeWriter, delay);
+    setTimeout(typeWriter,delay);
 
 }
+
+// ==========================
+// Botón "Terminé de leer"
+// ==========================
+
+finishButton.addEventListener("click", () => {
+
+    finishButton.classList.add("button-hide");
+
+    letter.classList.remove("paper-rise");
+    letter.classList.add("letter-hide");
+
+    setTimeout(() => {
+
+        letterScreen.classList.add("hidden");
+
+        responseScreen.classList.remove("hidden");
+        responseScreen.classList.add("fade-in");
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
+
+    },1800);
+
+});
+
+// ==========================
+// Botón "Aquí"
+// ==========================
+
+const hereButton = document.getElementById("hereButton");
+
+hereButton.addEventListener("click", () => {
+
+    const phone = "595982819415";
+
+    const message = encodeURIComponent(
+        "Holaa, ya estoy lista para hablar ❤️"
+    );
+
+    window.open(
+        `https://wa.me/${phone}?text=${message}`,
+        "_blank"
+    );
+
+});
+
+skipButton.addEventListener("click", () => {
+
+    // Oculta la pantalla inicial
+    welcomeScreen.classList.add("hidden");
+
+    // Muestra la pantalla de la carta
+    letterScreen.classList.remove("hidden");
+
+    // Quita cualquier animación
+    letter.classList.remove("paper-rise");
+    letter.classList.remove("letter-hide");
+
+    // Muestra la carta directamente
+    letter.style.opacity = "1";
+    letter.style.transform = "translateY(0)";
+
+    // Escribe toda la carta de una
+    letterText.innerHTML =
+        text +
+        '<span class="cursor"></span>';
+
+    // Hace visible el botón
+    finishButton.classList.remove("hidden");
+    finishButton.classList.add("fade-in");
+    finishButton.style.pointerEvents = "all";
+
+    // Lleva al inicio
+    window.scrollTo(0,0);
+
+});
