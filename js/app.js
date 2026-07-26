@@ -14,12 +14,10 @@ const letterText = document.getElementById("letterText");
 
 const bgMusic = document.getElementById("bgMusic");
 
-const musicControls = document.getElementById("musicControls");
-const playPauseButton = document.getElementById("playPauseButton");
-const volumeSlider = document.getElementById("volumeSlider");
+
 
 // Ocultar controles al iniciar
-musicControls.style.display = "none";
+
 
 // Volumen inicial
 bgMusic.volume = 0;
@@ -69,7 +67,7 @@ window.addEventListener("touchmove", () => {
 enterButton.addEventListener("click", async () => {
 
     // Mostrar controles
-    musicControls.style.display = "flex";
+   
 
     // Reiniciar volumen
     bgMusic.volume = 0;
@@ -300,27 +298,6 @@ hereButton.addEventListener("click", () => {
 
 // Cambiar volumen
 
-volumeSlider.addEventListener("input", () => {
-
-    const volume = Number(volumeSlider.value) / 100;
-
-    bgMusic.volume = volume;
-
-    if(volume === 0){
-
-        playPauseButton.textContent = "🔇";
-
-    }else if(bgMusic.paused){
-
-        playPauseButton.textContent = "▶️";
-
-    }else{
-
-        playPauseButton.textContent = "⏸️";
-
-    }
-
-});
 
 // Pausar / Reanudar
 
