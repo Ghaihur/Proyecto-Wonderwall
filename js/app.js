@@ -14,14 +14,8 @@ const letterText = document.getElementById("letterText");
 
 const bgMusic = document.getElementById("bgMusic");
 
-
-
-// Ocultar controles al iniciar
-
-
 // Volumen inicial
 bgMusic.volume = 0;
-volumeSlider.value = 3;
 
 let index = 0;
 
@@ -66,12 +60,7 @@ window.addEventListener("touchmove", () => {
 
 enterButton.addEventListener("click", async () => {
 
-    // Mostrar controles
-   
-
-    // Reiniciar volumen
     bgMusic.volume = 0;
-    volumeSlider.value = 30;
 
     try{
 
@@ -83,27 +72,27 @@ enterButton.addEventListener("click", async () => {
 
     }
 
-// Fade In suave hasta 5%
+    // Fade hasta 3% en 3 segundos
 
-let volumen = 0;
+    let volumen = 0;
 
-const volumenFinal = 0.05;
+    const volumenFinal = 0.03;
 
-const fade = setInterval(() => {
+    const fade = setInterval(() => {
 
-    volumen += 0.0015;
+        volumen += 0.0012;
 
-    if (volumen >= volumenFinal){
+        if(volumen >= volumenFinal){
 
-        volumen = volumenFinal;
+            volumen = volumenFinal;
 
-        clearInterval(fade);
+            clearInterval(fade);
 
-    }
+        }
 
-    bgMusic.volume = volumen;
+        bgMusic.volume = volumen;
 
-},120);
+    },120);
 
     enterButton.classList.add("button-hide");
 
@@ -299,44 +288,3 @@ hereButton.addEventListener("click", () => {
 // Cambiar volumen
 
 
-// Pausar / Reanudar
-
-playPauseButton.addEventListener("click", async () => {
-
-    if(bgMusic.paused){
-
-        try{
-
-            await bgMusic.play();
-
-            playPauseButton.textContent = "⏸️";
-
-        }catch(error){
-
-            console.log(error);
-
-        }
-
-    }else{
-
-        bgMusic.pause();
-
-        playPauseButton.textContent = "▶️";
-
-    }
-
-});
-
-// Mantener el icono sincronizado
-
-bgMusic.addEventListener("play", () => {
-
-    playPauseButton.textContent = "⏸️";
-
-});
-
-bgMusic.addEventListener("pause", () => {
-
-    playPauseButton.textContent = "▶️";
-
-});
